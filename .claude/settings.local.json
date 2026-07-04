@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import fonttools\")",
+      "Bash(pip3 show *)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c ' *)",
+      "Bash(cp \"/Users/epsoya/Downloads/epsoya-logo.svg\" /Users/epsoya/Desktop/srp-portfolio/img/epsoya-logo.svg)",
+      "Bash(python3)",
+      "Bash(python3 -m http.server 8090 --directory /Users/epsoya/Desktop/srp-portfolio)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8090/index.html)",
+      "Bash(kill %1)",
+      "Bash(python3 -m http.server 8090 --directory /Users/epsoya/Desktop/srp-portfolio > /tmp/server.log 2>&1 & *)",
+      "Bash(chmod 644 /Users/epsoya/Desktop/srp-portfolio/img/background.svg)",
+      "Bash(find /Users/epsoya/Desktop /Users/epsoya/Downloads -maxdepth 2 -mmin -180 -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" \\\\\\) 2>/dev/null)",
+      "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.02.png\" /Users/epsoya/Desktop/srp-portfolio/img/de-bouwregisseur.png)",
+      "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.29.png\" /Users/epsoya/Desktop/srp-portfolio/img/fundamento-pilates.png)"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-server",
+      "runtimeExecutable": "ruby",
+      "runtimeArgs": ["-run", "-e", "httpd", "/Users/epsoya/Desktop/srp-portfolio", "-p", "8080"],
+      "port": 8080
+    }
+  ]
+}

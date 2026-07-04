@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — BOTCH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="project-page">
+
+  <div class="project-detail-wrap">
+
+    <button class="project-back-btn" id="back-btn">Back</button>
+
+    <div id="project-hero" class="project-detail-hero">
+      <div class="project-detail-hero-placeholder">No image</div>
+    </div>
+
+    <div class="project-detail-meta" id="project-meta"></div>
+    <h1 class="project-detail-title botch-font" id="project-title">—</h1>
+    <div class="project-detail-body" id="project-body"></div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    /* ── All data inline so detail page is self-contained ── */
+    const allItems = [
+      {
+        id: 'identity-system',
+        title: 'Identity System',
+        category: 'Branding',
+        year: 2025,
+        image: '',
+        body: `
+          <p>A complete visual identity developed for an emerging creative studio — from the first mark to the full system. The brief asked for something timeless but not conservative: a brand that could live in print and on screen equally comfortably.</p>
+          <p>The logotype is a custom-drawn wordmark built on geometric proportions, with subtle optical corrections that make it feel steady rather than rigid. The colour palette runs monochrome with a single saturated accent — used sparingly to avoid diluting its impact.</p>
+          <p>Deliverables included: logotype and sub-mark, full colour system, typographic guidelines, stationery suite, social media templates, and a motion guidelines document.</p>
+        `
+      },
+      {
+        id: 'editorial-layout',
+        title: 'Editorial Layout',
+        category: 'Print / Publication',
+        year: 2024,
+        image: '',
+        body: `
+          <p>Art direction and layout design for an independent magazine focused on contemporary architecture and spatial thinking. Issue 04 explored the tension between interior silence and exterior noise — the design system had to carry that tension without illustrating it literally.</p>
+          <p>The grid is modular but deliberately loose in places: columns break, images bleed unexpectedly, captions sometimes appear far from their images. These are intentional disruptions — not accidents.</p>
+          <p>Typography is strictly two-weight: a serif editorial face for body text and a condensed grotesque for all headers and labels. No decorative elements beyond the images and the grid itself.</p>
+        `
+      },
+      {
+        id: 'type-specimen',
+        title: 'Type Specimen',
+        category: 'Typography',
+        year: 2024,
+        image: '',
+        body: `
+          <p>A custom specimen booklet showcasing an original typeface designed over a semester-long research project. The typeface — working title "SLAG" — explores optical illusions embedded in letterforms: characters that appear to lean when set in sequence, despite being geometrically upright.</p>
+          <p>The specimen is 32 pages, printed risograph in two colours. Layout decisions were made to let the type do the talking — generous white space, minimal copy, and a sequence that builds from single glyphs to full text settings.</p>
+          <p>The project won a commendation at the end-of-year student show and was shortlisted for a regional type competition.</p>
+        `
+      },
+      {
+        id: 'campaign-visuals',
+        title: 'Campaign Visuals',
+        category: 'Visual Communication',
+        year: 2025,
+        image: '',
+        body: `
+          <p>A series of poster and digital campaign visuals for a youth cultural event. The brief called for something that would stop people mid-scroll — without being loud for the sake of it.</p>
+          <p>The visual system is built around a single typographic gesture: extreme scale contrast between one large word and one small word per composition. All posters in the series follow the same rule, creating coherence while allowing each piece to breathe differently.</p>
+          <p>The campaign ran across print posters (A1/A3), digital OOH, and social formats. Response exceeded expectations: 40% above target attendance in the first weekend.</p>
+        `
+      },
+      {
+        id: 'packaging-study',
+        title: 'Packaging Study',
+        category: 'Product Design',
+        year: 2023,
+        image: '',
+        body: `
+          <p>Structural and graphic packaging design for a sustainable cosmetics brand. The challenge was to create packaging that communicates both premium quality and environmental responsibility — without using the tired visual clichés of either category (no green leaves, no distressed kraft textures).</p>
+          <p>The structural solution uses a single-material die cut that folds without adhesive. Graphic treatment is clinical: all white with embossed type, no colour except a single printed batch code that changes per run.</p>
+          <p>The project was developed as part of a live brief collaboration with a local startup brand.</p>
+        `
+      },
+      {
+        id: 'motion-experiment',
+        title: 'Motion Experiment',
+        category: 'Motion Graphics',
+        year: 2023,
+        image: '',
+        body: `
+          <p>A personal research project into kinetic typography — letters as movement, text as choreography. The starting question: can typography tell a story without words, only through its behaviour in time?</p>
+          <p>The output is a 90-second loop exploring five typographic behaviours: collapse, expansion, orbit, decay, and assembly. Each behaviour is treated as a character in an abstract narrative.</p>
+          <p>Tools: After Effects for animation, custom glyphs drawn in Illustrator. All typography is set in a modified version of a public-domain grotesque — cuts and modifications made in Glyphs.</p>
+        `
+      }
+    ];
+
+    function getParam(key) {
+      return new URLSearchParams(window.location.search).get(key);
+    }
+
+    function applyTheme() {
+      const pref = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', pref);
+    }
+
+    function render() {
+      applyTheme();
+      const id = getParam('id');
+      const item = allItems.find(p => p.id === id);
+
+      const titleEl = document.getElementById('project-title');
+      const metaEl  = document.getElementById('project-meta');
+      const bodyEl  = document.getElementById('project-body');
+      const heroEl  = document.getElementById('project-hero');
+
+      if (!item) {
+        titleEl.textContent = 'Project not found';
+        bodyEl.innerHTML = '<p>This project does not exist or has been removed.</p>';
+        return;
+      }
+
+      document.title = item.title + ' — BOTCH';
+      titleEl.textContent = item.title;
+      metaEl.innerHTML = `<span>${item.category}</span><span>${item.year}</span>`;
+      bodyEl.innerHTML = item.body;
+
+      if (item.image) {
+        heroEl.innerHTML = `<img src="${item.image}" alt="${item.title}">`;
+      }
+    }
+
+    document.getElementById('back-btn').addEventListener('click', () => {
+      if (document.referrer && document.referrer.includes(location.hostname)) {
+        history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      render();
+      gsap.from('.project-detail-wrap', { opacity: 0, y: 20, duration: 0.4, ease: 'power2.out' });
+    });
+  </script>
+</body>
+</html>
