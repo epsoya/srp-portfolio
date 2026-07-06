@@ -404,10 +404,22 @@ function homeHTML() {
         <div class="home-instructions">
           <h3>How to navigate</h3>
           <ul>
-            <li><span class="key">1–5</span> Jump to any section</li>
-            <li><span class="key">↑↓</span> Browse the list</li>
-            <li><span class="key">↵</span> Open a project</li>
-            <li><span class="key">D/L</span> Toggle dark / light</li>
+            <li>
+              <div class="instr-row"><span class="key">1–5</span><span class="instr-label">Jump to a section</span></div>
+              <p class="instr-desc">Press a number key to instantly switch between Home, Projects, About, Archive and Contact.</p>
+            </li>
+            <li>
+              <div class="instr-row"><span class="key">↑ ↓</span><span class="instr-label">Browse the list</span></div>
+              <p class="instr-desc">Use the arrow keys to move up and down through whatever list is open in the side panel.</p>
+            </li>
+            <li>
+              <div class="instr-row"><span class="key">↵</span><span class="instr-label">Open a project</span></div>
+              <p class="instr-desc">Hit enter to open the project or item that's currently selected in the list.</p>
+            </li>
+            <li>
+              <div class="instr-row"><span class="key">D / L</span><span class="instr-label">Switch the theme</span></div>
+              <p class="instr-desc">Press D or L anytime to flip between dark and light mode, no clicking required.</p>
+            </li>
           </ul>
         </div>
       </div>
@@ -440,11 +452,11 @@ function setupHomeBackground() {
     const invertedX = 0.5 - px;
     const invertedY = 0.5 - py;
 
-    const moveX = invertedX * 2 * 40;
-    const moveY = invertedY * 2 * 40;
-    const rotate = invertedX * 2 * 6;
+    const moveX = invertedX * 2 * 24;
+    const moveY = invertedY * 2 * 24;
+    const rotate = invertedX * 2 * 3;
 
-    gsap.to(bg, { x: moveX, y: moveY, rotate, duration: 1.2, ease: 'power2.out' });
+    gsap.to(bg, { x: moveX, y: moveY, rotate, duration: 1.6, ease: 'power2.out' });
   };
 
   window.addEventListener('mousemove', homeBgMouseHandler);
