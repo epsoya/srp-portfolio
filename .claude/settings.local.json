@@ -14,7 +14,10 @@
       "Bash(chmod 644 /Users/epsoya/Desktop/srp-portfolio/img/background.svg)",
       "Bash(find /Users/epsoya/Desktop /Users/epsoya/Downloads -maxdepth 2 -mmin -180 -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" \\\\\\) 2>/dev/null)",
       "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.02.png\" /Users/epsoya/Desktop/srp-portfolio/img/de-bouwregisseur.png)",
-      "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.29.png\" /Users/epsoya/Desktop/srp-portfolio/img/fundamento-pilates.png)"
+      "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.29.png\" /Users/epsoya/Desktop/srp-portfolio/img/fundamento-pilates.png)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
