@@ -335,6 +335,7 @@ function renderContent() {
     case 'projects': content.innerHTML = projectsHTML(projects, 'PROJECTS'); break;
     case 'archive':  content.innerHTML = archiveHTML(); break;
     case 'about':    content.innerHTML = aboutHTML(); setupAboutObserver(); break;
+    case 'contact':  content.innerHTML = contactHTML(); break;
   }
 
   const btn = content.querySelector('.btn-view-more');
@@ -403,7 +404,7 @@ function homeHTML() {
         <div class="home-instructions">
           <h3>How to navigate</h3>
           <ul>
-            <li><span class="key">1–4</span> Jump to any section</li>
+            <li><span class="key">1–5</span> Jump to any section</li>
             <li><span class="key">↑↓</span> Browse the list</li>
             <li><span class="key">↵</span> Open a project</li>
             <li><span class="key">D/L</span> Toggle dark / light</li>
@@ -620,6 +621,76 @@ function animateSkillBars() {
 }
 
 /* ─────────────────────────────────────────
+   CONTACT HTML
+───────────────────────────────────────── */
+function contactHTML() {
+  return `
+    <div id="contact-content">
+      <div class="contact-inner">
+        <h1 class="contact-title botch-font">Let's talk.</h1>
+
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:ernie.elijah@gmail.com">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            <span>ernie.elijah@gmail.com</span>
+          </a>
+          <a class="contact-link" href="tel:0611644802">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>06 11 64 48 02</span>
+          </a>
+          <a class="contact-link" href="https://www.instagram.com/epsoya" target="_blank" rel="noopener">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+            <span>@epsoya</span>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/elijah-delgado-369741257/" target="_blank" rel="noopener">
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>Elijah Delgado</span>
+          </a>
+        </div>
+
+        <div class="contact-form-box">
+          <h3 class="contact-form-label">Send a message</h3>
+          <form class="contact-form" onsubmit="handleContactSubmit(event)">
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-name">Name</label>
+                <input id="cf-name" type="text" placeholder="Your name" autocomplete="off">
+              </div>
+              <div class="contact-field">
+                <label for="cf-phone">Phone</label>
+                <input id="cf-phone" type="tel" placeholder="Your number" autocomplete="off">
+              </div>
+            </div>
+            <div class="contact-field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" placeholder="your@email.com" autocomplete="off">
+            </div>
+            <div class="contact-field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" rows="4" placeholder="What's on your mind?"></textarea>
+            </div>
+            <button type="submit" class="contact-submit">Send →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const name    = document.getElementById('cf-name').value.trim();
+  const phone   = document.getElementById('cf-phone').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !message) return;
+
+  const subject = encodeURIComponent(`Message from ${name}`);
+  const body    = encodeURIComponent(`Name: ${name}\nPhone: ${phone || 'n/a'}\nEmail: ${email}\n\n${message}`);
+  window.location.href = `mailto:ernie.elijah@gmail.com?subject=${subject}&body=${body}`;
+}
+
+/* ─────────────────────────────────────────
    GSAP ANIMATIONS
 ───────────────────────────────────────── */
 /* Main tab switch — clip-path wipe, out then in (sequential) */
@@ -673,7 +744,7 @@ function animateInitial() {
 /* ─────────────────────────────────────────
    KEYBOARD
 ───────────────────────────────────────── */
-const tabKeys = { '1': 'home', '2': 'projects', '3': 'about', '4': 'archive' };
+const tabKeys = { '1': 'home', '2': 'projects', '3': 'about', '4': 'archive', '5': 'contact' };
 
 document.addEventListener('keydown', e => {
   const tag = document.activeElement.tagName;
