@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
   <div id="app">
@@ -73,8 +74,92 @@
 
   </div>
 
+  <!-- ═══════════════════════════════════════
+       MOBILE OS — separate layer, only active under 700px
+  ═══════════════════════════════════════ -->
+  <div id="mobile-os">
+
+    <!-- LOCKSCREEN -->
+    <div id="lockscreen">
+      <div class="lock-bg" aria-hidden="true"></div>
+      <div class="lock-content">
+        <h1 class="lock-name botch-font">Elijah Delgado</h1>
+        <p class="lock-tagline">Designer. Still figuring it out.</p>
+        <p class="lock-sub">I experience things, then I make things. Look around.</p>
+      </div>
+      <div class="lock-hint">
+        <span class="lock-hint-pill"></span>
+        <span class="lock-hint-text">Swipe up to unlock</span>
+      </div>
+    </div>
+
+    <!-- HOMESCREEN -->
+    <div id="homescreen">
+      <div class="wallpaper" aria-hidden="true"></div>
+      <button id="tilt-enable" class="tilt-enable-btn" hidden>Enable motion</button>
+      <div class="app-grid">
+        <div class="app-tile" data-app="home">
+          <span class="tile-num botch-font">01</span>
+          <span class="tile-label">Home</span>
+        </div>
+        <div class="app-tile" data-app="projects">
+          <span class="tile-num botch-font">02</span>
+          <span class="tile-label">Projects</span>
+        </div>
+        <div class="app-tile" data-app="about">
+          <span class="tile-num botch-font">03</span>
+          <span class="tile-label">About Me</span>
+        </div>
+        <div class="app-tile" data-app="archive">
+          <span class="tile-num botch-font">04</span>
+          <span class="tile-label">Archive</span>
+          <span class="tile-badge"></span>
+        </div>
+        <div class="app-tile" data-app="contact">
+          <span class="tile-num botch-font">05</span>
+          <span class="tile-label">Contact</span>
+        </div>
+      </div>
+
+      <div id="mobile-dock" class="mobile-dock">
+        <button id="dock-hamburger" class="dock-hamburger" aria-label="Toggle list">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="dock-shortcuts">
+          <button id="dock-contact" class="dock-icon" aria-label="Contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          </button>
+          <button id="dock-theme" class="dock-icon" aria-label="Toggle theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FULLSCREEN APP CONTAINER -->
+    <div id="app-screen">
+      <div id="app-screen-content"></div>
+
+      <!-- Backdrop — tap to close bottom sheet -->
+      <div id="sheet-backdrop"></div>
+
+      <!-- Bottom sheet (project/archive lists) -->
+      <div id="bottom-sheet">
+        <div class="sheet-handle"></div>
+        <div id="sheet-list" class="sheet-list"></div>
+      </div>
+    </div>
+
+    <!-- Home indicator -->
+    <div id="home-indicator"></div>
+
+    <!-- Theme-switch notification -->
+    <div id="theme-notification"></div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
   <script src="script.js"></script>
+  <script src="mobile.js"></script>
 </body>
 </html>

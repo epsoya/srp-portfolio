@@ -98,7 +98,25 @@ Subtabpaneel schuift vanuit links in beeld bij het selecteren van een hoofdtab.
 
 ### Bouwproces
 
-Het bouwen verliep in lagen. Eerst de HTML-structuur: een vaste sidebar links, een main content area rechts. Dan CSS met custom properties voor dark en light mode, zodat het thema later met één attribuut te wisselen was. Vervolgens de JavaScript-kern: het state-object als middelpunt, de render-functie die de UI daarop opbouwt, en de data-arrays voor projecten en archief. Als laatste laag kwamen de GSAP-animaties. Die volgorde werkte goed: elke laag bouwde voort op de vorige en ik kon tussendoor testen zonder dat animaties in de weg zaten.
+Het bouwen verliep in lagen, waarbij ik elke laag afmaakte voordat ik verder ging.
+
+**Stap 1: HTML-structuur**
+Als eerste heb ik de basisstructuur neergezet: een vaste sidebar aan de linkerkant en een main content area rechts. Geen content, geen logica, alleen de skelettenbouw zodat ik wist waar alles zou komen te staan.
+
+**Stap 2: CSS custom properties**
+Daarna CSS met custom properties voor dark en light mode. Door alles via `--c1`, `--c2` en `--text` te definiëren kon ik het thema later met één attribuut op de `<html>` tag wisselen. Dit leek misschien vroeg in het proces, maar het betaalde zich later terug: ik hoefde nooit terug om kleuren te herzoeken.
+
+**Stap 3: State management en render-logica**
+Dit was de kern van het project. Ik heb een centraal `state`-object gebouwd dat bijhoudt welke tab actief is, welke subtab geselecteerd is en of je in een detailweergave zit. De `render()`-functie leest die state en bouwt de UI opnieuw op, elke keer. Geen directe DOM-manipulatie, alles via state. Dit klikte pas echt toen ik snapte waarom het op die manier werkt: je hoeft maar één plek bij te houden in plaats van tientallen losse elementen.
+
+**Stap 4: Data-arrays en dynamisch renderen**
+Projecten en archiefitems worden opgeslagen als objecten in een array. Subtabs worden automatisch gegenereerd op basis van die array: een nieuw project toevoegen betekent alleen een object toevoegen, de rest volgt automatisch. Dit was een van de momenten waarop ik echt voelde dat ik iets snapte van hoe JavaScript bedoeld is.
+
+**Stap 5: Interactie en navigatie**
+Keyboard navigatie (cijfers, pijltjes, Enter, Backspace), dark/light mode toggle via localStorage, de scrollspy op de About Me sectie met IntersectionObserver, en de back-knop die de state herstelt zonder page reload.
+
+**Stap 6: GSAP animaties**
+Als laatste laag kwamen de animaties. Clip-path wipe voor tab-transities, staggered fade-in bij laden, subtab slide-in vanuit links, en een SVG muisparallax op de homepage. Door animaties als laatste toe te voegen kon ik alles tussendoor testen zonder dat een kapotte animatie de rest blokkeerde.
 
 ### Reflectie
 
@@ -115,16 +133,24 @@ Tijdens het bouwen kwamen steeds nieuwe ideeën op die ik nog niet volledig de s
 
 ### Proces
 
-1. `git init` → `git add .` → `git commit -m "first commit"`
-2. Repository aangemaakt op GitHub en gekoppeld via `git remote add origin`
-3. Authenticatie via Personal Access Token (GitHub accepteert geen wachtwoorden meer)
-4. `git push -u origin main` → bestanden live op GitHub
-5. Vercel gekoppeld via GitHub. Automatisch gedetecteerd als statisch project, geen build-instellingen nodig
-6. Domein `epsoya.com` gekocht via Namecheap en gekoppeld via DNS-records in Vercel. SSL-certificaat automatisch geactiveerd.
+**Stap 1: Git installeren en initialiseren**
+Ik had Git nog niet geïnstalleerd. Na het installeren heb ik de repository geïnitialiseerd met `git init` in de projectmap, alle bestanden gestaged met `git add .` en de eerste commit aangemaakt met `git commit -m "first commit"`.
+
+**Stap 2: GitHub repository aanmaken**
+Op GitHub.com een nieuwe repository aangemaakt (`srp-portfolio`) en die lokaal gekoppeld via `git remote add origin`. Bij de eerste push bleek dat GitHub geen wachtwoorden meer accepteert voor git-operaties. Je hebt een Personal Access Token nodig. Die heb ik aangemaakt via GitHub Settings → Developer Settings → Personal Access Tokens en het token verwerkt in de remote URL zodat authenticatie automatisch werkt.
+
+**Stap 3: Eerste push**
+Met `git push -u origin main` stonden alle bestanden live op GitHub. Vanaf dat moment werkt elke volgende push met alleen `git push`.
+
+**Stap 4: Vercel koppelen**
+Via vercel.com het GitHub-account geautoriseerd en de repository geselecteerd. Vercel detecteert automatisch dat het een statisch project is — geen framework, geen build-instellingen nodig. Elke push naar `main` triggert automatisch een nieuwe deployment. Vercel geeft ook een preview-URL per commit, wat handig is om te testen voor je de live site overschrijft.
+
+**Stap 5: Eigen domein koppelen**
+Het domein `epsoya.com` gekocht via Namecheap. In Vercel het domein toegevoegd onder Project Settings → Domains. Vercel geeft dan twee DNS-records die je bij Namecheap moet invullen: een A-record voor het root-domein en een CNAME voor `www`. Na het instellen duurt het propageren van de DNS 10 tot 30 minuten. Het SSL-certificaat wordt door Vercel automatisch aangevraagd en geactiveerd via Let's Encrypt.
 
 ### Reflectie
 
-Het live zetten was eenvoudiger dan verwacht. Het enige struikelblok was de GitHub-authenticatie: een Personal Access Token in plaats van een wachtwoord, dat was even uitzoeken. Het koppelen van het eigen domein verliep via Claude Cowork soepel.
+Het live zetten was eenvoudiger dan ik van tevoren dacht. De meeste stappen zijn eenmalig: repository aanmaken, Vercel koppelen, domein instellen. Daarna is een update pushen gewoon `git add . && git commit -m "..." && git push`. Het enige struikelblok was de GitHub-authenticatie. Ik wist niet dat wachtwoorden niet meer werken voor git en moest uitzoeken hoe een Personal Access Token werkt. Dat kostte even tijd maar is ook meteen een goede les: veiligheid in developer tools gaat verder dan alleen een sterk wachtwoord.
 
 ---
 

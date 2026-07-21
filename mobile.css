@@ -1,0 +1,436 @@
+/* ─────────────────────────────────────────
+   MOBILE "OS" LAYER
+   Separate from the desktop styles in style.css.
+   Everything here is scoped to the mobile breakpoint —
+   desktop is completely unaffected.
+───────────────────────────────────────── */
+
+#mobile-os { display: none; }
+
+@media (max-width: 700px) {
+
+  #app { display: none; }
+
+  #mobile-os {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--c1);
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── LOCKSCREEN ── */
+  #lockscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    background: var(--c1);
+  }
+
+  .lock-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160vw;
+    z-index: 0;
+    color: var(--text);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  [data-theme="light"] .lock-bg { opacity: 0.04; }
+
+  .lock-bg-svg { width: 100%; height: auto; display: block; transform: translate(-50%, -50%); }
+
+  .lock-content { position: relative; z-index: 1; }
+
+  .lock-name {
+    font-size: clamp(36px, 11vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .lock-tagline {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .lock-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .lock-hint {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 1;
+  }
+
+  .lock-hint-pill {
+    width: 40px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .lock-hint-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── HOMESCREEN ── */
+  #homescreen {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .wallpaper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160vw;
+    z-index: 0;
+    color: var(--text);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  [data-theme="light"] .wallpaper { opacity: 0.04; }
+
+  .wallpaper-svg { width: 100%; height: auto; display: block; transform: translate(-50%, -50%); }
+
+  .tilt-enable-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: var(--c2);
+    border: 1px solid var(--pink);
+    border-radius: 20px;
+    padding: 8px 14px;
+  }
+
+  .app-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 80px 24px 140px;
+    height: 100%;
+    align-content: start;
+  }
+
+  .app-tile {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--c2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 18px;
+    gap: 8px;
+  }
+
+  .app-tile:active { background: var(--c1); border: 1px solid var(--c2); }
+
+  .tile-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--pink);
+    opacity: 0.8;
+  }
+
+  .tile-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .tile-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  /* ── DOCK ── */
+  .mobile-dock {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--c2);
+    border-radius: 30px;
+    padding: 12px 18px;
+  }
+
+  .dock-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .dock-hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pink);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .dock-hamburger.is-close span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .dock-hamburger.is-close span:nth-child(2) { opacity: 0; }
+  .dock-hamburger.is-close span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .dock-shortcuts {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .dock-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--text);
+  }
+
+  .dock-icon svg { width: 100%; height: 100%; }
+
+  /* ── APP SCREEN (fullscreen overlay) ── */
+  #app-screen {
+    display: none;
+    position: fixed;
+    z-index: 40;
+    background: var(--c1);
+  }
+
+  #app-screen.open #app-screen-content {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #app-screen-content { min-height: 100%; }
+
+  /* Reused desktop content blocks read fine at mobile widths already —
+     just soften the paddings a touch further inside the app screen. */
+  #app-screen-content .home-text,
+  #app-screen-content .tab-header,
+  #app-screen-content .preview-panel,
+  #app-screen-content .project-detail-inline,
+  #app-screen-content #contact-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #app-screen-content #home-content,
+  #app-screen-content #projects-content,
+  #app-screen-content #archive-content {
+    height: auto;
+    min-height: 100%;
+  }
+
+  #app-screen-content .home-bg { width: 160vw; }
+
+  /* ── ABOUT — swipeable screens ── */
+  .about-mobile { padding-top: 24px; }
+
+  .about-dots {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 0 16px;
+    background: var(--c1);
+  }
+
+  .about-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--c2);
+    transition: background 0.2s ease, width 0.2s ease;
+  }
+
+  .about-dot.active {
+    width: 18px;
+    border-radius: 4px;
+    background: var(--pink);
+  }
+
+  .about-swipe-wrap {
+    overflow: hidden;
+    width: 100vw;
+  }
+
+  .about-swipe-track {
+    display: flex;
+    width: max-content;
+  }
+
+  .about-swipe-track .about-panel {
+    width: 100vw;
+    flex: 0 0 100vw;
+    min-height: auto;
+    padding: 8px 24px 48px;
+  }
+
+  /* ── BOTTOM SHEET ── */
+  #sheet-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  #bottom-sheet {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    max-height: 65vh;
+    background: var(--c2);
+    border-radius: 24px 24px 0 0;
+    padding: 12px 20px 28px;
+  }
+
+  .sheet-handle {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--text-muted);
+    opacity: 0.5;
+    align-self: center;
+    margin-bottom: 14px;
+  }
+
+  .sheet-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sheet-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .sheet-item.active { background: var(--c1); }
+
+  .sheet-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .sheet-item-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .sheet-empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  /* ── HOME INDICATOR ── */
+  #home-indicator {
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    z-index: 80;
+    width: 120px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--text-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  #home-indicator.visible {
+    opacity: 0.6;
+    pointer-events: auto;
+  }
+
+  /* ── THEME NOTIFICATION ── */
+  #theme-notification {
+    display: none;
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 90;
+    background: var(--c2);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 12px 20px;
+    border-radius: 16px;
+    white-space: nowrap;
+  }
+}

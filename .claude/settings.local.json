@@ -17,7 +17,14 @@
       "Bash(cp \"/Users/epsoya/Desktop/Screenshot 2026-07-04 at 17.47.29.png\" /Users/epsoya/Desktop/srp-portfolio/img/fundamento-pilates.png)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(gh auth *)",
+      "Read(//Users/epsoya/**)",
+      "Bash(/usr/libexec/git-core/git-credential-osxkeychain)",
+      "Bash(git remote *)",
+      "Bash(/Library/Developer/CommandLineTools/usr/libexec/git-core/git-credential-osxkeychain store *)",
+      "Bash(git fetch *)",
+      "Bash(echo \"exit code: $?\")"
     ]
   }
 }
